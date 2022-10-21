@@ -1,0 +1,20 @@
+.d-view {
+  .d-container {
+    font-size: 160px;
+    background-color: #b6cff9;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    button {
+      font-size: 50px;
+      margin-top: 20%;
+      width: 300px;
+      height: 100px;
+      margin-bottom: 0;
+    }
+  }
+}
