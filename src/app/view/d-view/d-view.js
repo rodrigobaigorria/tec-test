@@ -12,14 +12,57 @@ export default class DView extends View {
         this.init();
     }
 
+    async waitForClick() {
+        return new Promise((resolve) => {
+            console.log('click');
+            resolve();
+          });
+    }
+
+    async waitFor5() {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, 5000);
+          });
+    }
 
     async init() {
-        const button = document.createElement("button");
-        button.innerText= "Atrás";
+        setTimeout(() => {
+            alert("5 o Click");
+        }, 5000);
+        const click = Utils.createButton();
+        click.innerText= "Click";
+        const click5 = Utils.createButton();
+        click5.innerText= "5 o Click";
+        const click3 = Utils.createButton();
+        click3.innerText= "3 y Click";
+        const goBack = Utils.createButton();
+        goBack.innerText= "Atrás";
         this.viewElement.querySelector(".d-container").innerHTML = this.text;
-        this.viewElement.querySelector(".d-container").appendChild(button);
+        this.viewElement.querySelector(".d-container").appendChild(click);
+        this.viewElement.querySelector(".d-container").appendChild(click5);
+        this.viewElement.querySelector(".d-container").appendChild(click3);
+        this.viewElement.querySelector(".d-container").appendChild(goBack);
 
-        await Utils.addEventListener(button, 'click', () => {
+        await Utils.addEventListener(click, 'click', () => {
+            Promise.all([
+                this.waitForClick(),
+                this.waitFor5()
+            ]);
+        });
+
+        await Utils.addEventListener(click3, 'click', () => {
+            setTimeout(() => {
+                alert("3 y Click");
+            }, 3000);
+        });
+
+        await Utils.addEventListener(click5, 'click', () => {
+                alert("5 o Click");
+        });
+
+        await Utils.addEventListener(goBack, 'click', () => {
             (new BView("Vista B", 8)).start();
             this.end();
         });
