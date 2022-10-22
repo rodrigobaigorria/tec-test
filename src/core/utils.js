@@ -491,3 +491,7 @@ Utils.waitAfterImageLoaded = async function(imageUrl) {
     imgToLoad.onload = () => imgLoadPromise.resolve();
     await imgLoadPromise.promise;
 }
+
+Utils.createButton = function () {
+    return document.createElement("button");
+}

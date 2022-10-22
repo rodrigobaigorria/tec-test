@@ -2,12 +2,10 @@ import View from "../../../core/view/view";
 import html from "./c-view.html";
 import "./c-view.scss";
 import Utils from "../../../core/utils";
+import AView from "../a-view/a-view";
+import DView from "../d-view/d-view";
 
 export default class CView extends View {
-
-    /**
-     * Esta vista muestra un texto por 1 segundos y termina.
-     */
 
     constructor(text) {
         super(html);
@@ -17,19 +15,24 @@ export default class CView extends View {
 
 
     async init() {
-        // viewElement está definido en View, y es el contenedor de la vista.
-        const reset = document.createElement("button");
+        const reset = Utils.createButton();
         reset.innerText = "Reiniciar";
-        const next = document.createElement("button");
+        const next = Utils.createButton();
         next.innerText = "Siguiente";
         this.viewElement.querySelector(".c-container").innerHTML = this.text;
         this.viewElement.querySelector(".c-container").appendChild(reset);
         this.viewElement.querySelector(".c-container").appendChild(next);
 
-        await Utils.addEventListener(next, 'click', (e) => console.log(e));
-        await Utils.waitForSeconds(5);
+        await Utils.addEventListener(next, 'click', () => {
+            (new DView("Vista D")).start();
+            this.end();
+        });
+        await Utils.addEventListener(reset, 'click', () => {
+            (new AView("Vista A")).start();
+            this.end();
+        });
 
-        this.end(); // <- Acá podría retornar una salida, pero esta vista no tiene salida.
+    
     }
 
 }
