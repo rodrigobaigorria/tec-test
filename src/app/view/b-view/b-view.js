@@ -24,8 +24,8 @@ export default class BView extends View {
         this.viewElement.querySelector(".b-container").appendChild(next);
 
         await Utils.addEventListener(next, 'click', () => {
-            (new CView("Vista C")).start();
-            this.end((Number(this.data) + 5))
+            (new CView("Vista C", (Number(this.data) + 5))).start();
+            this.end()
         });
 
     }

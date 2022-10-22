@@ -20,7 +20,7 @@ export default class DView extends View {
         this.viewElement.querySelector(".d-container").appendChild(button);
 
         await Utils.addEventListener(button, 'click', () => {
-            (new BView("Vista B", 5)).start();
+            (new BView("Vista B", 8)).start();
             this.end();
         });
     }

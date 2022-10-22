@@ -7,9 +7,10 @@ import DView from "../d-view/d-view";
 
 export default class CView extends View {
 
-    constructor(text) {
+    constructor(text, data) {
         super(html);
-        this.text = text
+        this.data = data;
+        this.text = text;
         this.init();
     }
 
@@ -20,6 +21,8 @@ export default class CView extends View {
         const next = Utils.createButton();
         next.innerText = "Siguiente";
         this.viewElement.querySelector(".c-container").innerHTML = this.text;
+        this.viewElement.querySelector(".c-container").innerHTML += `<br/> ${this.data}`;
+
         this.viewElement.querySelector(".c-container").appendChild(reset);
         this.viewElement.querySelector(".c-container").appendChild(next);
 
