@@ -16,16 +16,40 @@ export default class CView extends View {
 
 
     async init() {
+        const swap = Utils.createButton();
+        swap.innerText = "Swap";
+        swap.className = this.data < 10 ? "c-boton-pastel" : "c-boton-lila";
         const reset = Utils.createButton();
         reset.innerText = "Reiniciar";
+        reset.className = this.data < 10 ? "c-boton-rosa" : "c-boton-verde" 
         const next = Utils.createButton();
         next.innerText = "Siguiente";
-        this.viewElement.querySelector(".c-container").innerHTML = this.text;
-        this.viewElement.querySelector(".c-container").innerHTML += `<br/> ${this.data}`;
+        next.className = this.data < 10 ? "c-boton-lila" : "c-boton-azul"
 
-        this.viewElement.querySelector(".c-container").appendChild(reset);
-        this.viewElement.querySelector(".c-container").appendChild(next);
+        const label = document.createElement("label");
+        label.innerHTML = this.data;
+        const container = this.viewElement.querySelector(".c-container");
+        const newClass = this.data < 10 ? "c-estilo-1" : "c-estilo-2";
+        container.classList.add(newClass);
+        container.innerHTML = this.text;
+        container.appendChild(label);
+        container.appendChild(swap);
+        container.appendChild(reset);
+        container.appendChild(next);
 
+        await Utils.addEventListener(swap, 'click', () => {
+            if (container.classList.contains('c-estilo-1')) {
+                container.classList.replace("c-estilo-1", "c-estilo-2");
+                swap.className = "c-boton-lila";
+                reset.className = "c-boton-verde"; 
+                next.className = "c-boton-azul";
+            } else {
+                container.classList.replace("c-estilo-2", "c-estilo-1");
+                swap.className = "c-boton-pastel";
+                reset.className = "c-boton-rosa"; 
+                next.className = "c-boton-lila";
+            }
+        });
         await Utils.addEventListener(next, 'click', () => {
             (new DView("Vista D")).start();
             this.end();

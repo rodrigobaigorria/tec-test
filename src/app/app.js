@@ -8,6 +8,5 @@ export default class App {
 
     async start() {
         const aView = await (new AView("Vista A")).start();
-
     }
 }
